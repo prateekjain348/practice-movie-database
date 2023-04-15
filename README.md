@@ -5,7 +5,7 @@
 ### 1. You can clone it from github by running following command
 
 ```
-  $ git clone https://github.com/pjai20_nike/practice-movie-database.git
+  $ git clone https://github.com/prateekjain348/practice-movie-database.git
 ```
 
 ### 2. Import project into eclipse
