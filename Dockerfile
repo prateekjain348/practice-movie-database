@@ -3,6 +3,8 @@ FROM openjdk:11-jre-slim
 EXPOSE 8080
 
 ENV MYSQL_HOST='host.docker.internal'
+ENV MYSQL_USER='root'
+ENV MYSQL_PASSWORD='root'
 
 ADD target/movie-management-0.1.jar movie-management-0.1.jar
 
