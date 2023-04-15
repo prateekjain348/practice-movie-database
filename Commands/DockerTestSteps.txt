@@ -1,0 +1,13 @@
+/* docker network ls
+docker network create movie-database
+docker container run --name mysqldb --network movie-database -e MYSQL_ROOT=root -e MYSQL_DATABASE=movies -d mysql:8
+docker container ls
+docker container log mysqldb
+docker exec -it mysqldb bash
+mysql -uroot -proot
+show datbases;
+spring.datasource.url=jdbc:mysql://mysqldb:3306/movies?useSSL=false
+*/
+
+docker build -t movie-management .
+docker run --name movie-management -p 8081:8081 -d --rm movie-management

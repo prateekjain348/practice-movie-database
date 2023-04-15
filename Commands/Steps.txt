@@ -1,0 +1,43 @@
+docker build -t prateekjain348/movie-management:1 .
+
+docker push prateekjain348/movie-management:1
+
+minikube start --driver=docker
+minikube status
+minikube dashboard
+
+kubectl delete -n default deployment movie-management
+kubectl create deployment movie-management --replicas=5 --image=prateekjain348/movie-management:1
+
+kubectl get deployments
+kubectl get pods
+kubectl get services
+
+kubectl expose deployment movie-management --type=LoadBalancer --port=8081
+kubectl get services
+minikube service movie-management
+
+kubectl scale deployment/movie-management --replicas=5
+
+
+
+#Install kube-state-metrics
+    git clone https://github.com/kubernetes/kube-state-metrics.git
+    kubectl apply -f kube-state-metrics/examples/standard
+
+curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh \
+    | bash && NEW_RELIC_CLI_SKIP_CORE=1 \
+    NR_CLI_CLUSTERNAME=mk NR_CLI_NAMESPACE=movie-management-k \
+    NR_CLI_PRIVILEGED=true NR_CLI_LOW_DATA_MODE=true NR_CLI_KSM=true NR_CLI_KUBE_EVENTS=true \
+    NR_CLI_PROMETHEUS_AGENT=true NR_CLI_LOGGING=true NR_CLI_NEWRELIC_PIXIE=true \
+    NR_CLI_PIXIE_API_KEY=px-api-247d4fa5-0c4a-4095-a77c-336b1511064b \
+    NR_CLI_PIXIE=true NR_CLI_PIXIE_DEPLOY_KEY=px-dep-09bc050b-24cc-488b-9b9e-4ebf39d46a87 \
+    NEW_RELIC_API_KEY=NRAK-FGTILOR7DS1PZSRG3NOO6FDD81N NEW_RELIC_ACCOUNT_ID=3735436 \
+    /usr/local/bin/newrelic install -n kubernetes-open-source-integration
+
+curl -O https://download.newrelic.com/infrastructure_agent/integrations/kubernetes/newrelic-infrastructure-k8s-latest.yaml
+
+kubectl cluster-info dump | grep -i 'cluster-name'
+kubectl get pods --all-namespaces | grep kube-state-metrics
+
+kubectl create -f newrelic-infrastructure-k8s-latest.yaml
