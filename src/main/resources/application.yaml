@@ -1,0 +1,25 @@
+spring:
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST}/movies?allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      initialization-fail-timeout: 0
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: TRACE
+        hikari.HikariConfig: DEBUG

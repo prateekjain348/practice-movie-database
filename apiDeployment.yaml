@@ -1,0 +1,43 @@
+# Movie Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-app
+spec:
+  selector:
+    matchLabels:
+      app: movie-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: movie-app
+    spec:
+      containers:
+        - name: movie-app
+          image: prateekjain348/movie-management
+          ports:
+            - containerPort: 8080
+          env: # Setting Environmental Variables
+            - name: DB_HOST   # Setting Database host address
+              value: mysql
+            - name: DB_NAME   # Setting Database host address
+              value: movies
+            - name: DB_USERNAME  # Setting Database username
+              value: root
+            - name: DB_PASSWORD # Setting Database password
+              value: root
+---
+# Define a 'Service' To Expose the application
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8080    # Port inside the cluster
+      targetPort:   # Port exposed to the outside
+  selector:
+    app: movie-app
+  type: NodePort
