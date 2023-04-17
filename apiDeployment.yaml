@@ -20,7 +20,7 @@ spec:
             - containerPort: 8080
           env: # Setting Environmental Variables
             - name: DB_HOST   # Setting Database host address
-              value: mysql
+              value: mysqldb
             - name: DB_NAME   # Setting Database host address
               value: movies
             - name: DB_USERNAME  # Setting Database username

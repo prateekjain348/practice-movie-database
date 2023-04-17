@@ -2,39 +2,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysqldb
   labels:
-    app: mysql
+    app: mysqldb
     tier: database
 spec:
   selector: # mySQL Pod Should contain same labels
     matchLabels:
-      app: mysql
+      app: mysqldb
   strategy:
     type: Recreate
   template:
     metadata:
       labels: # Must match 'Service' and 'Deployment' selectors
-        app: mysql
+        app: mysqldb
         tier: database
     spec:
       containers:
-        - name: mysql
+        - name: mysqldb
           image: prateekjain348/movie-database
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: root
           ports:
             - containerPort: 3306
-              name: mysql
+              name: mysqldb
 ---
 # Define a 'Service' To Expose MySQL to Other Services
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysqldb
   labels:
-    app: mysql
+    app: mysqldb
     tier: database
 spec:
 #  clusterIP: None
@@ -43,5 +43,5 @@ spec:
     - port: 3306
       targetPort: 3306
   selector:
-    app: mysql
+    app: mysqldb
     tier: database
