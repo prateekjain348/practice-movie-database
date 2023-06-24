@@ -2,6 +2,13 @@
 
 # CRUD Example of Spring-Boot-REST-JPA-MySQL (movie-management)
 
+### Swagger Related Entries
+
+```
+  http://localhost:8080/v2/api-docs
+  http://localhost:8080/swagger-ui.html
+```
+
 ### 1. You can clone it from github by running following command
 
 ```
