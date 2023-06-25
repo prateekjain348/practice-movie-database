@@ -16,7 +16,7 @@ import java.util.Properties;
 import static com.movie.utils.MetadataService.getResource;
 
 @Controller
-@RequestMapping("bankdetails")
+@RequestMapping("bankservice")
 public class RazorpayController {
 
     Map<String, Object> IFCSList = new HashMap<>();
@@ -34,7 +34,9 @@ public class RazorpayController {
 
     @GetMapping("ifsc/{ifscCode}")
     public ResponseEntity<Object> getMovie(@PathVariable("ifscCode") Integer ifscCode) {
+        System.out.println("Looking for ifsc : '" + ifscCode + "'");
         String url = "https://ifsc.razorpay.com/" + IFCSList.get(ifscCode.toString());
+        System.out.println("Looking for URL : '" + url + "'");
         RestTemplate restTemplate = new RestTemplate();
         Object resp = restTemplate.getForObject(url, Object.class);
         return new ResponseEntity<Object>(resp, HttpStatus.OK);

@@ -114,4 +114,19 @@ can call following Endpoints by using POSTMAN
   http://localhost:8080/movieservice/movie/<id>
 ```
 
-### Note - Replace <id> with actual id 
+### Note - Replace <id> with actual id
+
+### Mysql Docker image related help
+
+```
+    https://hevodata.com/learn/docker-mysql/
+    
+    sudo docker exec -it [container_name] bash
+    mysql -h localhost -u root -p
+    
+    Local Machine Setup
+        mysql.server start
+        mysql -h localhost -u root -p
+        Change PAssword:- ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+
+```
